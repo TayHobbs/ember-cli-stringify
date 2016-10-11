@@ -1,6 +1,8 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 
+import ENV from 'dummy/config/environment';
+
 moduleForAcceptance('Acceptance | convert to string');
 
 test('Coverts specified files to a string', function(assert) {
@@ -18,5 +20,13 @@ test('Can convert string back to native structures', function(assert) {
   andThen(function() {
     assert.equal(find('#json-parsed').text().trim(), "Hi I'm TayHobbs, well that is my username. My real name is Taylor. You can email me at hobbstay@gmail.com.");
     assert.equal(find('#html-safe').text().trim(), "John Wayne:    This looks good. Let's ship it.");
+  });
+});
+
+test('Uses final dir name as object key when nested directory', function(assert) {
+  visit('/main');
+
+  andThen(function() {
+    assert.ok(ENV.nestedKey);
   });
 });
